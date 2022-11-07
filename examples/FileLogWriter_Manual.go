@@ -8,22 +8,20 @@ import (
 	"time"
 )
 
-import l4g "code.google.com/p/log4go"
+import l4g "log4go"
 
-const (
-	filename = "flw.log"
-)
+const filename = "flw.log"
 
 func main() {
 	// Get a new logger instance
 	log := l4g.NewLogger()
 
 	// Create a default logger that is logging messages of FINE or higher
-	log.AddFilter("file", l4g.FINE, l4g.NewFileLogWriter(filename, false))
+	log.AddFilter("file", l4g.FINE, l4g.NewFileLogWriter(filename, false, false))
 	log.Close()
 
 	/* Can also specify manually via the following: (these are the defaults) */
-	flw := l4g.NewFileLogWriter(filename, false)
+	flw := l4g.NewFileLogWriter(filename, false, false)
 	flw.SetFormat("[%D %T] [%L] (%S) %M")
 	flw.SetRotate(false)
 	flw.SetRotateSize(0)

@@ -34,11 +34,12 @@ type FileConfig struct {
 	// Recommended: "[%D %T] [%C] [%L] (%S) %M"//
 	Pattern string `json:"pattern"`
 
-	Rotate   bool   `json:"rotate"`
-	Maxsize  string `json:"maxsize"`  // \d+[KMG]? Suffixes are in terms of 2**10
-	Maxlines string `json:"maxlines"` //\d+[KMG]? Suffixes are in terms of thousands
-	Daily    bool   `json:"daily"`    //Automatically rotates by day
-	Sanitize bool   `json:"sanitize"` //Sanitize newlines to prevent log injection
+	Rotate    bool   `json:"rotate"`
+	Maxsize   string `json:"maxsize"`  // \d+[KMG]? Suffixes are in terms of 2**10
+	Maxlines  string `json:"maxlines"` //\d+[KMG]? Suffixes are in terms of thousands
+	Daily     bool   `json:"daily"`    //Automatically rotates by day
+	Sanitize  bool   `json:"sanitize"` //Sanitize newlines to prevent log injection
+	MaxBackup int    `json:"maxBackup"`
 }
 
 type SocketConfig struct {
@@ -195,6 +196,7 @@ func jsonToFileLogWriter(filename string, ff *FileConfig) (*FileLogWriter, bool)
 	flw.SetRotateLines(maxlines)
 	flw.SetRotateSize(maxsize)
 	flw.SetSanitize(sanitize)
+	flw.SetRotateMaxBackup(ff.MaxBackup)
 	return flw, true
 }
 

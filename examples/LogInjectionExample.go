@@ -10,10 +10,6 @@ import (
 
 import l4g "log4go"
 
-const (
-	filename = "loginjection.log"
-)
-
 func main() {
 	var lineno int
 
@@ -39,7 +35,7 @@ func main() {
 	log.AddFilter("file", l4g.FINE, flw)
 
 	// Log some experimental messages
-	for _,message := range(user_input) {
+	for _, message := range user_input {
 		log.Info(message)
 	}
 
@@ -51,7 +47,7 @@ func main() {
 	// Close the log
 	log.Close()
 
-	// Print what was logged to the file 
+	// Print what was logged to the file
 	fd, err := os.Open(filename)
 	if err != nil {
 		fmt.Printf("Error reopening file: %s", filename)
